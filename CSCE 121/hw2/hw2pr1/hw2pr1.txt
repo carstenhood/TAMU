@@ -1,0 +1,48 @@
+Carsten Hood
+hw 2 pr 1
+Testing Document
+"Rock Paper Scissors"
+
+I tested the program once with each correct input in order to ensure that user moves functioned correctly. By luck these outputs also demonstrated that all possible outcomes of the rock paper scissors game were demonstrated. I input a random char 2, and then Rock, and won. I then input a random 4, and then Paper, and tied. I then input a random 3, and scissors, and lost. I then tested the program a final time with an invalid entry to ensure the program does not crash.
+
+Output 1: 
+Rock Paper Scissors!
+Enter a character to begin: 2
+Make your move.
+Enter "r", "p", or "s": r
+
+Your move: Rock
+Machine move: Scissors
+Rock beats Scissors.
+You win!
+
+
+Output 2:
+Rock Paper Scissors!
+Enter a character to begin: 4
+Make your move.
+Enter "r", "p", or "s": p
+
+Your move: Paper
+Machine move: Paper
+Tie game!
+
+
+Output 3:
+Rock Paper Scissors!
+Enter a character to begin: 3
+Make your move.
+Enter "r", "p", or "s": s
+
+Your move: Scissors
+Machine move: Rock
+Rock beats Scissors.
+Machine wins.
+
+
+Output 4:
+Rock Paper Scissors!
+Enter a character to begin: 3
+Make your move.
+Enter "r", "p", or "s": x
+Invalid Entry. You forfeit the game.

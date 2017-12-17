@@ -1,0 +1,17 @@
+Carsten Hood
+Homework 7
+Testing Document
+
+----------------------------------------------------
+
+Problem 1
+"Shapes by Coordinates"
+
+I input non-numerals in the input boxes. Nothing showed up.
+
+input:
+x: rgdf  y: 4dgg
+
+I input visible coordinates and tested various shapes.
+
+I tested different shapes at the same coordinates. They all were centered and of reasonable size.

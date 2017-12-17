@@ -1,0 +1,317 @@
+MyMDB Project
+
+Chance Gray
+Carsten Hood
+Connor Fear
+Matt Hegarty
+
+CSCE 121-200
+11/25/2013
+
+Testing Document
+
+-----------------------------------------
+Contents
+
+Adding a movie
+Editing a movie
+General Search
+Search By Title
+Search By Year
+Search By Actor
+Search By Tags
+
+Display All
+Clear Display
+Update Rows
+Page Navigation
+Persistence
+
+-----------------------------------------
+General Use
+
+Input
+1. click Quit button
+2. click Edit Movie button
+click Done
+click Add button
+click Done
+
+Output
+1. Window closes
+2. Text boxes and buttons show and hide themselves as we switch between edit/add and search modes
+
+Reasoning
+1. Test the Quit button.
+2. Test that all buttons and text boxes hide and show themselves when appropriate
+
+-----------------------------------------
+Adding a movie
+Note: adding and editing movies mostly use the same functions; because of this there is no need to test some of the details of these two operations for each one.
+
+Input
+1. click New Movie buttonMovie Title: Iron Man
+Poster Filename: “iron_man.jpg”
+Release Year: 2008
+Actor: Name and Photo: robert_downey.jpg Robert Downey Jr.
+Tags: Action, Scifi
+Score: 8.8
+click Create button
+click Done button
+click Display All button
+Close and reopen program and search the movie.
+
+2. click New Movie button
+Movie Title:
+Poster Filename: blank
+Release Year: 2008
+Actor: Name and Photo: Dave
+Tags: Romance
+Score: 5.4
+click Create button
+
+2. click New Movie button
+Movie Title: Title
+Poster Filename:
+Release Year:
+Actor: Name and Photo:
+Tags: Romance
+Score:
+click Create button
+click Done button
+click Display All button
+Close and reopen program and search the movie.
+
+Output
+1.All the information was displayed correctly on the right, except for the Tag “Scifi”, which didn’t match any of our provided tags, and so wasn’t displayed or saved to the new movie.
+Upon returning to the main screen and displaying all movies, Iron Man was displayed with the other movies.
+Upon reopening the program and searching for the new movie, it was displayed.
+2. no output
+3. displayed the movie title and year of 0 but all other information was blank; the movie displayed correctly upon reopening the program.
+
+Reasoning
+1. Test that the text fields for adding a new movie read the data correctly. 
+2. Test that a movie with no title is ignored (a movie without a title shouldn’t be allowed)
+3. Test that a movie with no information but a title is still accepted, and that the year is initialized to a default of 0, and that the mostly empty movie is still able to be written to and read from the file
+
+-----------------------------------------
+Editing a movie
+
+Input
+1. Movie Title: Black Death //select the movie to edit
+click Edit Movie
+Movie Title: Black Death 2
+Poster Filename: “black_death2.jpg”
+Release Year: blabs
+Actor Name and Photo: sean_bean.jpg Sean Bean, Eddie Redmayne, Carice Van Houten,
+Tags: Medieval, Thriller, Horror, Action
+Score: 9.2 6.5 7.3, 8.5 100 -7 8.4
+click Update button
+
+Output
+1. The following information was displayed:
+Movie Title: Black Death 2
+Poster Filename: “black_death2.jpg”
+Release Year: 2005 // our bad year input “blabs” was correctly ignored
+Actor Name and Photo: sean_bean.jpg Sean Bean, Eddie Redmayne, Carice Van Houten, 
+Tags: Medieval, Thriller, Horror, Action;
+Score: 9.2, 6.5, 7.3, 8.5, 100, -7, 8.4;
+
+Reasoning
+1. Ensure that editing a movie reads in the text fields correctly and discards bad information, instead using the original data. We also tested bad scores like 100 and -7 and realized ints that aren’t between 0 and 10 were accepted by the program; we went back and added a catch, and now bad scores are ignored;
+
+-----------------------------------------
+General Search
+
+Input
+1. Title: Black Death
+Year: 2001
+Actor: Christian Bale
+Tags:
+2. Title: Nope
+Year: 1836
+Actor: Bob
+click General Search button
+3. Title: None
+Year: 2005
+Actor: Elijah Ferrel
+Tags: Superhero
+
+Output
+1. 4 movies were displayed
+“Black Death”, matching the title
+“Fellowship of the Ring”, matching the year
+“The Dark Knight” and “The Prestige” which both starred the actor
+2. no information was displayed
+3. several movies displayed, each matching one and only one aspect of the search criteria
+
+Reasoning
+1. Test that all fields contribute to search results
+2. Test that bad input is ignored and doesn’t cause errors
+3. Same as 1
+
+-----------------------------------------
+Search By Title
+
+Input
+1. Title: Pizza
+2. Title: Anchorman
+click Search by Title
+
+Output
+1. For “Pizza” there was no output, as expected.
+2. Information for the Movie “Anchorman” was displayed.
+
+Reasoning
+
+-----------------------------------------
+Search By Actor
+
+Input
+1. Actor(s): Bean
+2. Actor(s): None
+3. Actor(s):  Steve Carell Orlando Bloom
+click Search By Actor
+
+Output
+1. Displays a picture of Sean Bean, text labeling the picture as Sean Bean, as well as the resulting movies "Black Death", and "The Fellowship of the Ring" along with all of the information for the movies.
+2. No results.
+3. Displays a photo of Steve Carell but not Orlando Bloom. Only shows movie results for Carell. 
+
+Reasoning
+1. Test that only part of an actors name is needed to identify an actor.
+2. Test that inputting a bad name doesn’t cause errors.
+3. Test that only movies for the first Actor recognized are shown. This is correct as we wanted Search by Actor to find movies starring only the actor whose image is displayed to prevent confusion. General Search could be used to find movies for all actors listed.
+
+-----------------------------------------
+Search By Year
+
+Input
+1. Year: 2001
+2. Year: 1700
+3. Year: Your nose
+4. Year: 2005
+click Search by Year
+
+Output
+1. results in "The Fellowship of the Ring"
+2. no output
+3. no output
+4”. results in “Black Death"
+
+Reasoning
+Checking several cases and some random input.
+
+-----------------------------------------
+Search By Tags
+
+Input
+1. Tag(s): Action Comedy
+2. Tag(s): Action, Comedy
+3. Tag(s): Blabla, Medieval
+click Search by Tags button
+
+Output
+1. Returned 5 movies, some labeled with Action and some with Comedy.
+2. Returned only movies labeled with Action.
+2. no output
+
+Reasoning
+1. confirm valid tags work correctly
+2. ensure that punctuation is invalid and the following text is ignored, which is acceptable as we specify “use spaces”
+3. check random input is ignored
+
+-----------------------------------------
+Display All
+
+Input
+click Display All
+1. when the screen is blank
+2. when there are already search results displayed
+
+Output
+all posters and movie information are displayed in rows on the right of the screen
+
+Reasoning
+check Display All works and clears current results before displaying all the movies.
+
+-----------------------------------------
+Clear Display
+
+Input:
+click: Clear Display
+1. when movies are already displayed
+2. when the display is empty
+
+Output
+1. the movies were cleared
+2. no output
+
+Reasoning
+Test that Clear Display clears movies or does nothing if there are currently no movies.
+
+-----------------------------------------
+Update Rows
+
+Input
+click Display All button
+1. Update Rows: 4 //starting at 2
+2. Update Rows: 1
+3. Update Rows: 5 // upper limit is 4
+4. Update Rows: -5 // bottom limit is 1
+5. Update Rows: blabla
+click Update Rows
+
+Output
+1. Movies are redrawn smaller as 4x4 rather than 2x2. The next button disappears as all fit on one page now. Pages box updates from 1/2 to 1/1.
+2. First movie is displayed full screen (1 row). Page box updates to 1/9 (9 movies, 1 per page). Next button appears.
+3. 5 is too big and the max of 4 rows are displayed
+4. -5 is too small and converted to 1 row being displayed
+
+Reasoning
+Test that Update Rows functions to redraw movies, update the page boxes, reset to the first page, and hide or show the next and previous buttons as appropriate
+
+-----------------------------------------
+Page Navigation
+
+Input
+click Display All button
+click Next button until it disappears
+click Previous button until it disappears
+update rows displayed from 2 to 1 so that more pages are required
+
+Output
+clicking Next ups the page count and if it’s the last page, causes the Next button to disappear. It also causes Previous button to reappear when past 1.
+clicking Previous subtracts one from the page count and if it’s on the first page, causes the Previous button to disappear. It also causes the next button to reappear when leaving the last page.
+
+Reasoning
+test the page buttons and ensure that they hide and show when appropriate
+test the page output boxes update when the buttons are clicked
+
+-----------------------------------------
+Persistence
+
+Input:
+1. add a movie
+display the movie
+close the window using the Quit button
+reopen the program
+display all movies
+2. edit a movie
+display the changes
+close and reopen the program
+search for the movie by its new information
+3. add a movie and close the program without using the Quit button. Search for the movie.
+
+Output:
+1. the added movie displayed with all other movies upon reopening the program
+2. the movie displayed when being searched for; the data had been successfully saved to and read from the file.
+3. no results - the movie we added did not write to the file as we did not close the window through “Quit”
+
+reasoning:
+Test the persistence of movie data; test that changes made (adding and editing) are saved between closing and opening the program, and only when the program is closed through the Quit button.
+
+note:
+The file 'mdb.txt' is loaded into a vector of movies structs when the program is run.  Whenever an operation that adds or makes changes to these structs is called by the user, the new data is save in the vector rather than the mdb file.  All of the changes are saved to the file only when the program closes.  Information is persistent during successful operation and proper closure of the program.  If the program fails, or program operation is abruptly terminated, persistent data remains in whatever state it was in when the program was started.
+
+-----------------------------------------

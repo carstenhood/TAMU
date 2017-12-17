@@ -1,0 +1,24 @@
+Carsten Hood
+Homework 4
+Testing Document
+
+----------------------------------------------------
+
+Problem 1 - MyMDB
+"Movie Database"
+
+I tested each of the possible menu options several times to cover all possible errors:
+
+I tested entering a new movie and was able to display it's information and values. I restarted the program and the information was saved and displayed correctly.
+
+I updated the information for the movie one value at a time. The program output the updated values.
+
+I tested the mean, median, max and min by entering several decimals and confirming the answers with a calculator.
+
+I input random and available actor names and it output the correct movies featuring the actors.
+
+I input incorrect and valid years and it output matching movies or no movies, as appropriate.
+
+I input "q" to save and quit, and the program saved the values.
+
+I entered blank lines for a new movie, which skewed the way the data was saved and loaded on the next program startup; I made it so that the program would not accept empty input, except to cancel an operation.
