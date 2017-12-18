@@ -1,0 +1,144 @@
+\documentclass{article}
+
+\usepackage{fullpage}
+\usepackage{url}
+
+\title{Programming Languages Overview, CSCE 314}
+
+\author{Carsten Hood, UIN: 922009787}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+Programming languages progressed rapidly over the latter half of the twentieth century, culminating in a series of powerful, high-level languages developed near the turn of the millennium. By tracing the origins and features of a dozen notable programming languages over this period, one may begin to understand at least a portion of the complex web of relationships connecting them.
+
+Of the various programming paradigms that have emerged in the evolution of modern computer languages, this report will focus on two in particular---the object-oriented paradigm, pioneered by SIMULA 67 and cemented by many later programming languages, notably C++ and Java; and the functional paradigm, exemplified by the pure, lazy language Miranda and its popular successor Haskell. These two paradigms---object-oriented and functional---are not mutually exclusive, as demonstrated by Scala, the youngest of the languages surveyed; and many other methodologies and styles exist and coexist.
+
+Also discussed are more specialized programming languages, including ALGOL and the later MATLAB, both designed for advanced numerical computations, along with SQL, a standard in database interaction. Most of the programming languages mentioned in this report, if not at least sustained by teachers and researchers, are commonly used in industry today.
+
+\section{Programming Languages}
+
+\subsection{ALGOL}
+
+ALGOL is a programming language developed to perform scientific calculations. A committee of western scientists developed the first version in 1958, and subsequent standards were established in 1960 and 1968. Primary focuses of the language include portability and universality~\cite{algol1}.
+
+ALGOL was popular among researchers. It had a significant impact on the syntax of later programming languages, introducing the block structure and providing for if-statements and iteration. The language features reserved keywords, user-defined data types, and dynamic arrays~\cite{algol1}.
+
+\subsection{SIMULA}
+
+SIMULA was developed in the 1960s by a pair of Norwegian computer scientists, Kristen Nygaard and Ole-Johan Dahl, as a means of performing computer simulations~\cite{simula1}. The language is largely a descendant of ALGOL 60~\cite{simula2}.
+
+The first version of SIMULA gained popularity in Europe for performing simulations; however, it soon became apparent that an improved, more versatile version could be useful in more general programming applications. A second version of the language, SIMULA 67, launched the object-oriented programming paradigm. It introduced the terms ``class'' and ``object'', as well as the notion of inheritance and subclassing~\cite{simula1}.
+
+SIMULA 67, due to its revolutionary nature, inspired a host of other object-oriented programming languages. Both C++ and Smalltalk were directly inspired by SIMULA 67~\cite{simula3}.
+
+\subsection{C}
+
+In 1972 Dennis Ritchie developed the programming language called C to replace assembly language in implementing the Unix operating system. The C language was designed to retain many of the low-level capabilities of assembly language, while providing for more versatility and efficiency of implementation~\cite{c1}.
+
+C achieved widespread use as a replacement for assembly language in various applications, including the coding of operating systems and of compilers and interpreters of higher-level languages~\cite{c2}.
+
+Now C is recognized as one of the most popular programming languages of all time~\cite{tiobe1}.
+
+\subsection{SQL}
+
+Structured Query Language, better known as SQL, was released in 1974~\cite{sql1}. The language was designed as a means of interacting with databases. It still the most widely used language in database systems~\cite{sql2}.
+
+SQL provides basic commands for communicating with a database, and is capable of most required database interactions. It is often extended for use in specific implementations, as in Microsft SQL Server, Access, and Oracle~\cite{sql2}.
+
+\subsection{C++}
+
+Inspired by his experience with SIMULA 67, considered the first object-oriented programming language, Bjarne Stroustrup worked to augment the powerful and widespread C language with object-oriented features. In 1983 he released the first version of C++. Subsequent improvements to the C++ language, including a new standard in 2011, have solidified its place in the field of computing~\cite{cplusplus1}.
+
+Like its predecessor C, C++ is an imperative language. Furthermore, it features classes and inheritance and is capable of generic programming. C++ also boasts a robust standard library and continued development, with another update expected in 2017~\cite{cplusplus1}.
+
+Since its creation C++ has been widely used across various technologies. Due to its efficient nature, it is especially popular in resource-constrained or performance-critical systems and applications~\cite{cplusplus2}.
+
+\subsection{MATLAB}
+
+MATLAB was developed by MathWorks in 1984. It was designed to perform advanced numerical computations and linear algebra, and soon spread into other domains~\cite{matlab1}.
+
+The term MATLAB stands for matrix laboratory. It encompasses a programming language as well as an application and a special development environment for writing programs. The language is object-oriented; many consider its features to be similar to those of C++. It also allows for efficient matrix and vector calculus~\cite{matlab2}.
+
+Today MATLAB is used by millions of scientists, researchers and engineers around the globe~\cite{matlab3}.
+
+\subsection{Miranda}
+
+Computer scientist David Turner developed Miranda in the mid-1980's. His objective was to produce a simple and flexible functional programming language for commercial use~\cite{miranda1}. Miranda gained popularity among researchers. Today it is used in the teaching of functional programming languages~\cite{miranda2}.
+
+Miranda is pure, lazy, and non-strict. It also features polymorphic capabilities. Miranda heavily influenced the design of later functional languages, notably Haskell~\cite{miranda2}.
+
+\subsection{Haskell}
+
+Intent on creating a standard functional programming language, a group of researchers developed Haskell in 1990. The language has since been enhanced by subsequent standardizations and community support. It has seen widespread use in teaching and researching functional languages, as well as in industry for easier, safer, and more efficient use over imperative programming languages~\cite{haskell1}.
+
+Haskell is pure, meaning its functions are similar to mathematical expressions; lazy, meaning functions do not evaluate their arguments; and statically typed, meaning the type associated with each expression is determined at compile-time. These and other features streamline the language and serve to limit errors and unnecessary code~\cite{haskell2}.
+
+\subsection{Python}
+
+Guido van Rossum first released Python in 1991. Python was initially intended to succeed the programming language ABC, and was designed with an emphasis on readability and efficiency of development. Today Python is widely used for various applications, such as scripting, artificial intelligence, and information security. It allows for efficient, high-level application development~\cite{python1}.
+
+Python is object-oriented and features dynamic semantics. It also features high-level integrated data structures. Modules, packages, and a powerful standard library allow for easy reuse and portability~\cite{python2}.
+
+\subsection{Java}
+
+Computer scientists at Sun Microsystems developed Java with the goal of superseding C and C++ with a cleaner, higher-level, and more efficient programming language. The first version of Java was released in 1995. Frequent improvements have come every few years since~\cite{java1}.
+
+Java adheres to and even furthers the object-oriented programming paradigm. Notably, the Java language is platform-independent and programs can generally run across operating systems, giving rise to the slogan ``Write once, run anywhere''~\cite{java2}.
+
+Today Java is often ranked as the most popular programming language, having surpassed both C and C++ in the TIOBE Index, which ranks programming languages by popularity. Java is especially widespread in web applications due to its portability. Google has also adopted the Java language for applications running on the Android mobile operating system~\cite{tiobe1}.
+
+\subsection{C$^\sharp$}
+
+C$^\sharp$ was initially developed by Microsoft to be used with the .NET platform. Its design philosophy focused on simplicity, object-oriented capabilities, and type-safety. The language was first released in 2000. C$^\sharp$ has seen widespread use among Microsoft technologies and has become a competitive alternative to Java in many applications, including operating systems, compilers, and video games~\cite{csharp1}.
+
+C$^\sharp$ is a member of the C family of programming languages, and thus is closely related to C, C++, and Java. Furthermore it supports many varied programming methodologies, including functional and generic styles. Its chief designer, Anders Hejlsberg, considers C$^\sharp$ to most closely resemble an improvement of C++~\cite{csharp2}.
+
+\subsection{Scala}
+
+Having contributed to the improvement of Java but feeling limited by its constraints, Martin Odersky began work on a new programming language. In 2004 a public version of Scala was released. Being nearly a decade newer than Java, the Scala language incorporated modern features either lacking in or poorly assimilated into Java~\cite{scala1}.
+
+From the start Scala integrated functional and object-oriented capabilities. While all values in Scala are considered objects and operations are executed through calling methods, functions with a preference towards immutability can also be used. Scala features type-inference and a simple syntax. Scala was also designed to utilize Java libraries and to coexist with Java code~\cite{scala2}.
+
+Recently Scala has gained popularity as a modern programming language for general software development. Many large technology companies, including Twitter and Intel, use Scala for critical backend systems~\cite{scala2}.
+
+\section{Programming Language Comparison}
+
+\subsection{Programming Paradigm}
+
+\subsubsection{Object-Oriented Languages}
+
+Most languages described herein are object-oriented, being based around instances of objects associated with defined class types. SIMULA 67 is typically regarded as having introduced the object-oriented paradigm, directly inspiring the development of C++. Python, Java, C$^\sharp$, and Scala are all primarily object-oriented.
+
+\subsubsection{Functional Languages}
+
+Functional languages are often contrasted with imperative languages. In functional programming, programs comprise mathematical functions and emphasize higher-level operations and immutability. In so-called pure functional languages expressions produce constant values and once created data cannot be changed. Miranda was an early pure functional language; it heavily influenced Haskell, another pure functional language widely in use today~\cite{functional1}.
+
+While Scala also allows for functional programming, it is considered an impure functional language because it is primarily object-oriented and does not mandate immutability. Java, which has incorporated functional capabilities, may also be regarded as an impure functional language.
+
+\subsection{Popularity}
+
+Popularity is one of the best metrics for determining the real-world value of a programming language. Every day engineers and researchers determine what systems and technologies to use to optimize program development and user experience, thereby casting their votes in the marketplace of programming languages.
+
+The popularity of a programming language can be gauged by various means. The number of projects, programs, or even lines of code estimated to be written in a certain language may be considered, as well as the number of engineers guessed to use or know the language. The TIOBE Index amasses data from twenty-five online search engines, among other factors, to determine the popularity of different programming language~\cite{tiobe1}.
+
+According to the TIOBE Index as determined in September of 2015, Java is the most popular programming language. Its popularity is rated at 19.6\% of all languages. Java is widely used in computer education and web and application development, all markets that expanded rapidly after its inception. Java is notable for its portability~\cite{popular1}.
+
+The C programming language is ranked next in popularity, at 15.6\%~\cite{tiobe1}. C is still commonly used for low-level applications, such as programming operating systems and compilers, and in embedded systems. While many newer languages have focused on distancing developers from hardware, C has retained its place as a powerful low-level language~\cite{popular1}.
+
+Ranked behind C and Java are C++ (6.78\%), C$^\sharp$ (4.9\%), and Python (3.7\%), all general-use, object-oriented programming languages common in industry. Notably, C++ has steadily declined in popularity over the past decade, presumably due to the advent of similar but more modern languages like Java. Scala, a much more recent development, has gained popularity as developers and companies adopt it for various uses, though it is still ranked only twenty-seventh.
+
+MATLAB, ranked seventeenth, maintains its role in advanced mathematical calculations. Haskell, ranked thirty-eighth, is common in research and education, and also enjoys some use in industry, while its predecessor Miranda has been largely confined to the study of functional language in academic circles. Similarly, both ALGOL and SIMULA have given way to their successors in real-world applications, and are now enshrined in the fast-moving history of computer science.
+
+\clearpage
+
+\bibliographystyle{plain}
+\bibliography{a1}
+
+\end{document}
+
+
+
+

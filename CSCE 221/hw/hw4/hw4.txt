@@ -1,0 +1,96 @@
+Carsten Hood
+CSCE 221
+HW 4
+
+—————————————————————————
+1) A group of children want to play a game where in each turn the player with the most money must give half of his/her money to the player with the least amount of money. If there is a tie in terms of the wealthiest or poorest player, one is selected at random.
+
+A) What data structure(s) should be used to play this game efficiently? What is the cost of a turn in this case? Explain. (15 points)
+
+Because I find it unlikely that more than one or a few players are tied for poorest or richest and need to be randomly selected, I choose to use a sorted list. The list contains pairs of {double money, string name}. A priority queue isn’t viable because both the minimum and maximum players are used and returning the minimum element of a priority queue isn’t necessarily randomly choosing one of the players with the least money. At the start, assume the list is already sorted. Otherwise doing so takes O(n^2) time using an insertion sort. 
+
+A turn: to choose one of the players with the least money truly randomly, find the max_index in the list, representing the index of the last player with the least money by iterating through the players until a money value does not equal that of the first player. This could take O(n) if all children have the same amount. Then select a random_index from 0 to the max_index, which represents our poorest player. Initialize a pointer “poorest” starting at the beginning of the list and iterate through the list, incrementing a counter each time, until the counter reaches random_index. Poorest will settle on the chosen player. If no players are tied for the poorest, then random_index and max_index will both be 0 and the time will be O(1). However, it is possible that the complexity of randomly choosing a poorest player is O(n) if all players have the same amount of money. A similar process for choosing the richest player starting from the back, excluding the player already chosen, takes O(n) time as well. Next operate on the money values of the chosen players. Several simple operations together take O(1) time. Then sort the list. Because only 2 players may be out of place and the list is otherwise sorted, an insertion sort is faster and takes only O(n) time. It must iterate through n objects, taking O(n), and move two of them as many as n times, resulting in 3 O(n) operations total, which simplifies to O(n).
+
+Overall, a turn is O(n) + 2*O(n) + O(1) + O(n). This simplifies to O(n).
+
+B) What happens if all players start off with the same amount of money? Is there a more efficient algorithm in this case? Explain. (15 points)
+
+If all players start with the same amount of money, the players selected in the first turn will play the following turns, swapping money until everyone is even again. In this case an unsorted array may be more efficient, allowing for random access. An efficient algorithm may keep track of the random indexes chosen for the poorest and richest players, and they would simply alternate giving half of their money back and forth until their money values are equal again. Then, two new players are randomly chosen, and the algorithm would repeat. All of these operations could take constant time. No reordering would be required and elements can be randomly accessed in O(1) in an array.
+
+—————————————————————————
+2) Problem C-8.4 in the text (p. 363). Show how to implement the stack ADT using only a priority queue and one additional member variable. In addition to what is specified in the question, carefully analyze the running time and space used by your implementation. (35 points)
+
+The additional member variable would be an int “top” that keeps track of the key of the top element, or the smallest key in the priority queue. The “top” key would start at 0, and grow negative as more items are added to the stack. Switching the sign of “top” (making it positive) happens to represent the size of the stack. (if this was using a max_priority queue, then the member variable size of the array)
+
+stack using a priority queue {
+	int top_priority = 0;
+	Pair { int priority, Elem element}
+	priorityQueue<Pair> pq;
+
+	Algorithm pop()
+		pw.removeMin();
+		increment top_priority so that top_priority represents the next min element
+	Algorithm push(element)
+		decrement top_priority to keep the top the min element
+		pw.insertItem(Pair(top_priority, element))
+	Algorithm top()
+		return pq.minElement()
+	Algorithm empty()
+		return (does top_priority equal 0)
+	Algorithm size()
+		return negative top_priority;
+}
+
+The running time and space of a stack implemented using a priority queue depends on how the priority queue is implemented. This priority queue is implemented with a linked list. Because the priority queue functions as a stack and elements are added and removed at the top of the list, the list will be sorted automatically. All the main stack operations are constant, because all operations concern the first element in the list. There’s no need to iterate through list elements to go beyond it.
+
+“pop” takes constant time. It calls the queue’s removeMin, which always takes O(1) because the first element in the list will always have the smallest key (top_priority). Incrementing top_priority is also constant.
+
+“push” takes constant time. Inserting an item to the front or top of a list takes O(1), as does decrementing the counter.
+
+“top” is also O(1). It calls the queue’s minElement. The minimum element is always at the front of the list, or the top of the stack, and so is always looked at first.
+
+“empty” and “size” are constant because they each perform one simple operation.
+
+The overall memory used by the queue will be linear at O(n), growing proportionally to the number of elements. Each individual operation is constant. Because the priority queue uses a list there is never a need to expand or copy space, and because it functions as a stack, only one element (at the top) needs to be considered at a time. However, memory may be fragmented.
+
+
+—————————————————————————
+3) Problem C-8.17 in the text (p. 365). Design an algorithm that computes the kth smallest element of a set of n distinct integers in O(n+klogn) time. In addition to what is specified in the question, carefully analyze the running time and space used by your algorithm. (35 points)
+
+- Many sources were used for this problem.
+
+1 Store the integers in an unordered array A. If they are in another structure like a list, they can be moved arbitrarily into an array in O(n) time through a simple copy. This can be ignored because the following operation is also O(n). O(n) + O(n) = O(n).
+
+2 Sort the array so that it is implementing a binary heap. This takes linear time using the heap-building algorithm “make_heap” below, because the number of elements that require sorting diminishes as more are sorted. Instead of taking O(nlogn), it can be calculated to only take O(n). Space complexity is also O(n) because function overhead builds up for recursive calls to Heapify, which can also be simplified to O(n).
+
+3 Then call removeMin() k-1 times. Maintaining the heap order using downheap takes O(logn) time because at worst an element may have to be shifted a number of times equivalent to the height of the tree, logn. So for k-1 calls, the total cost is O(klogn). The space complexity is O(1) because down heap only swaps elements, and between the k-1 function calls the used space is cleared. 
+
+4 Lastly, return minElement as the answer. This is always the root element and the operation takes O(1) time.
+
+Overall it is O(n) + O(n) + O(klogn) + O(1)
+Simplifying to O(n + klogn)
+
+Algorithm find_smallest (int k)
+1	array A = all numbers
+	
+2	Algorithm make_min_heap (A)
+		heap.size = A.size
+ 			for (int i from 1 to half of A.size )
+  				call algorithm Heapify on(A, i)
+	Heapify (A, i):
+		left = 2i
+		right = 2i + 1
+		smallest = i
+		
+		if (left >= heap_length[A] and A[left] < A[smallest]) then
+ 			smallest = left
+ 		if (right >= heap_length[A] and A[right] < A[smallest]) then
+ 			smallest = right
+		 if smallest does not equal i then
+ 			swap A[i] and A[smallest]
+	 	
+		Heapify(A, smallest)
+
+3	for (int i from 1 to k-1)
+		removeMin (remove the root element and down_heap)
+4	return minElement. (return the root element, or A[0])

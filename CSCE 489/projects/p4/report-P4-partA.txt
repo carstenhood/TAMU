@@ -1,0 +1,48 @@
+Carsten Hood
+UIN: 922009787
+CSCE 489-599 Cloud Computing
+Fall 2017
+
+Project 4 Part A Report
+
+==========================
+
+GENERAL
+• Took 5 hours to implement this part.
+• Turning in by early-bird deadline for extra credit.
+• To build/run simply execute aggiestack.py: $ python aggiestack.py
+
+GITHUB
+• Part A Timestamp: 2017/11/29 ~12:21:00 PM
+• GitHub URL: https://github.tamu.edu/carstenhood/489-17-c/commit/775fcd6c5f994119d1d38015577a674d3a1ff497
+
+NOTES
+• Part A uses the new input files (with racks included).
+• The program is meant to accept multiple commands in a single run and isn’t persistent.
+• Program should accomodate all input errors.
+• All commands are logged in aggiestack-log.txt, which saves when the program closes.
+• Attempts to create an instance with the name of an existing instance (or with nonexistent flavor or image names) are cancelled and logged. Attempts to remove an instance with a nonexistent name are also cancelled and logged.
+
+GENERAL DESIGN
+• Program is centered around a main loop that processes each user command and calls the relevant function. Each function returns True if completed successfully or otherwise returns False and prints a relevant error statement. This True/False return value is used to log the successfulness of each command/function.
+• In order to handle part A's Instance objects as well as the new input files, all key object containers (for Rack, Machine, Image, Flavor, and Instance objects) are newly implemented as Python dictionaries. Each item's "name" parameter is used as its key. Image, Flavor, and Rack objects are stored in global dictionaries. Each Rack object has a dictionary of Machine objects, and each Machine object has a dictionary of Instance objects. In this way instances can be easily added or deleted from their associated machines and machine resource availability can be adjusted accordingly.
+
+==========================
+DESIGN - COMMAND APIS
+
+$ aggiestack server create --image IMAGE --flavor FLAVOR_NAME INSTANCE_NAME
+• Check that instance name is unique; check that desired flavor & instance exist; create instance object; iterate across racks and machines and find machine to host instance; adjust selected machine's available resources accordingly.
+
+$ aggiestack server delete INSTANCE_NAME
+• Iterate across racks and machines to find desired instance; delete instance from machine and increase machine's available resources accordingly.
+
+$ aggiestack server list
+• Iterate across racks and machines and print instance name, image name, and flavor name.
+
+$ aggiestack admin show hardware
+• Iterate across racks and machines and print each machine's resource availability variables.
+
+$ aggiestack admin show instances
+• Iterate across racks and machines and print instance names, machine names, machine IP addresses, and rack names.
+
+

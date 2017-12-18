@@ -1,0 +1,94 @@
+Carsten Hood
+CSCE 221
+HW 3
+
+—————————————————————————
+1) The depth of a node in a tree is the number of ancestors it has in the tree. Show how to specialize the Euler Tour traversal of Section 7.3.7 (p. 303) to compute the depth of all the nodes of a binary tree. Carefully analyze the running time and space used by your algorithm. (30 points)
+
+Only perform an action for the preorder visit of the Euler traversal. Each node has a property “depth”. In the EulerTour, set  depth to the parent’s depth+1, and then recursively call EulerTour on any sub-trees:
+
+Algorithm EulerTour (Node n)
+	preorder visit:
+		if n is a child (has a parent) then
+			set n.depth to n.parent.depth+1
+		else
+			set n.depth to 0
+  	if n is internal then
+		recursively tour the left subtree of n by calling EulerTour(n.left()) 
+		recursively tour the right subtree of n by calling EulerTour(n.right())
+
+The running time is linear at O(n). The algorithm visits each of n nodes once and performs an O(1) action at each node: setting its depth.
+
+Considering function overhead, the space complexity of the algorithm is O(log(n)), as the algorithm is recursive. The most memory will be consumed at the deepest portion of the tree, when several functions’ overheads are built up on the stack. Since the maximum depth of a binary tree is bounded by log(n), the maximum amount of space that can be consumed by recursive function calls trickling down the tree is proportional to log(n), or O(log(n)).
+
+—————————————————————————
+2) The internal path length I of a tree T is the sum of the depths of all internal nodes in T, and the external path length E of T is the sum of the depths of all the leaves in T. Prove by induction that if T is a binary tree with n internal nodes, then E = I + 2n. (Hint: Use induction on n, the number of internal nodes.) (35 points)
+
+Proof by induction:
+
+Base case:
+Consider a binary tree T with 3 nodes: a root node A and two children, B and C. By definition, A is an internal node and B and C are leaf nodes.
+
+0	    A
+	  /    \ 
+1	B     C
+
+The sum of the depths of all leaf nodes, E, is 2, as B and C each have a depth of 1.
+The sum of the depths of all internal nodes, I, is 0, as A has no ancestors.
+The number of internal nodes is 1, as only A is internal and has children.
+Plug into E = I  + 2n and get  2 = 0 +2(1). Simplify:  2 = 2. True.
+
+Induction Step: 
+Assume E = I +2n is true for a binary tree T with an arbitrary number of internal nodes, n.  
+Add two child nodes Y and Z to a leaf node X of T, making X an internal node and Y and Z leaf nodes. 
+0	   A				    A
+	  /   \				  /    \ 
+1	X	B	  —>	X     B
+  				      /  \
+2				    Y   Z
+Let d represent the depth of X.
+The number of internal nodes n increases to n+1, as X has become internal. 
+The depth of all internal nodes, I, increases to I+d, as the depth of X is now added to the internal path length. 
+The depth of all external nodes, E, increases to (E-d)+2d+2 = E+d+2, as the depth of X is subtracted and the depths of Y and Z are added to the external path length.
+Plug into E = I + 2n and get:
+(E+d+2) =  (I+d) + 2(n+1).
+Simplify:
+E+d+2 =  I+d+2n+2.
+    -d -2       -d        -2
+E = I + 2n
+True.
+
+—————————————————————————
+3) The path length of a tree T is the sum of the depths of all nodes in T (it is the sum of the internal and external path lengths of the tree). Describe a linear-time method for computing the path length of a tree T (which is not necessarily binary). Carefully analyze the running time and space used by your algorithm. (35 points)
+
+I would use a preorder traversal, modified in order to pass the depth of the node as a parameter. Visiting a node means adding its depth to a counter, path_length.
+
+algorithm calc_path_length:
+
+	initialize integer total_path_length to 0
+	begin below algorithm add_subtree_depths with p=(the root node) and depth=0
+	
+	algorithm add_subtree_depths(T, p, depth):
+		add depth to total_path_length
+		for every child of p
+			recursively tour the subtrees of p by calling add_subtree_depths(T, p.child, depth+1)
+
+	return total_path_length
+
+The running time is linear at O(n). The algorithm visits each of n nodes once and performs an O(1) action at each node: adding its depth to the total path length.
+
+The space complexity of the algorithm is O(n). The most memory will be consumed at the deepest portion of the tree, when several functions’ overheads are built up on the stack. Since the maximum depth of the tree is bounded by the number of elements, n, the maximum space used at any time is proportional to n. So the space complexity is O(n). The variable holding the overall path_length will maintain a constant amount of memory after its initialization.
+
+		 memory consumption sketch
+
+ 				     ^    ^
+consumption     ^    ^   ^     ^    ^
+			  ^   ^                ^     ^
+			^                                 ^ ^ ^ ^
+		      ^
+					time
+ 
+ 
+ 
+ 
+ 

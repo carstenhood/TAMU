@@ -1,0 +1,147 @@
+CSCE 489 quiz 2
+
+Quiz 2 
+due on Monday, 10/9 at 11:59pm.
+
+We do not expect perfect answers. In some cases, we are interested in seeing how you approach the question.
+
+Multiple Attempts - Not allowed. This test can only be taken once.
+Force Completion - This test can be saved and resumed later.
+
+
+===================================
+QUESTION 1
+4 points   
+
+Which of the following assumptions should not be made about a distributed system? Mark all that apply.
+
++ The network latency is always low and predictable
+- The set of computer working together (called group of nodes) can change over time
++ New nodes cannot join a distributed system
+- The nodes of a distributed system may fail at any time
+
+
+===================================
+QUESTION 2
+4 points   
+
+Which of the following are reasons to use NoSQL over relational databases? Mark all that apply.
+
++ Most of the data in present day applications is unstructured and cannot be fit in schemas
+– There is a need to maintain all the data in a single server
++ The volume of data is huge
++ Database queries need to be returned quickly
+
+
+===================================
+QUESTION 3
+4 points   
+
+Which of the following statements about MongoDB are false? Mark all that apply.
+
++ All MongoDB documents should have the same set of fields
++ MongoDB is a wide column database
+– MongoDB supports JSON documents
++ Adding a field to a document will add that field to all documents
+
+
+===================================
+QUESTION 4
+4 points   
+
+Which of the following about in-memory databases are true?
+
++ If the machine running the in-memory database restarts, all the data is lost
++ Fetching data from memory (RAM) is orders of magnitude faster than fetching data from the disk
+– In-memory databases need to have a predetermined schema (4:22)
+– In-memory databases can never store data on the disk
+
+
+===================================
+QUESTION 5
+4 points   
+
+Failure detectors have a property called completeness. When a process fails, if at least one other processor identifies that the process has failed, the failure detector is said to be complete. 100% complete failure detectors are complete under all conditions. Which of the following failure detectors is not 100% complete?
+
+– All-to-all heartbeating
++ Centralized heartbeating
+– Gossip protocol
+– Ping-based protocol
+
+
+===================================
+QUESTION 6
+10 points   
+
+Are relational databases obsolete? Is there a reason to prefer them over NoSQL databases? Answer in 3-5 sentences.
+
+No, relational databases are not obsolete; there are several reasons to prefer them to NoSQL databases. Relational databases are well-established and widely supported in existing software. SQL, which is used to program with relational databases, is a simple, powerful, and well-known language. Using a relational database may also be preferable when the relevant data is static and strictly structured, or when strict adherence to "ACID" qualities (atomicity, consistency, isolation, and durability) is desired.
+
+
+===================================
+QUESTION 7
+20 points   
+
+Cassandra provides different consistency levels that can be ensured at query time. ANY is a level of consistency for write queries, where the query to a key succeeds if it is written to any one of the nodes, including ones that may not be managing the key. QUORUM is a level of consistency where the write succeeds only after a majority of the nodes (i.e., more than half) managing the key have been written to. Answer the following questions in 3-5 sentences each.
+
+--------------------
+1. What can you say about the availability of these two consistency levels?
+
+(1) ANY provides the highest level of availability since a write must only be written to one node. QUORUM provides less availability (but more consistency). This is because QUORUM writes must be propagated among a majority of nodes before being fulfilled, which may lead to failure if nodes are offline and propagation is delayed.
+
+--------------------
+2. If there are n nodes in Cassandra managing a key, how many failures can the two consistency levels handle?
+
+(2) In the worst case ANY can tolerate only one failure, if a sole node that has committed a new write goes offline. QUORUM can tolerate at least n/2 node failures, since even if n/2 nodes that incorporated a new write go offline, there will be at least one node still online that has registered the write.
+
+
+===================================
+QUESTION 8
+35 points   
+
+Answer the following question about Chord:
+A P2P system using Chord with a ring size of 64 has nodes at positions 1, 5, 7, 17, 32, 34, 40, 50, and 62. Answer the following questions and show how you arrived at the result (will be especially useful for partial credit):
+
+1. (1 point) How many entries does each finger table have? 
+2. (2 points) A key k is hashed to 49. Which node is this key-value pair stored in?
+3. (6 points) Write down the finger table of node 5.
+4. (6 points) Write down the finger table of node 40
+5. (10 points) If a request for a file with key k hashed to value 49 comes to node 5, how will the request be redirected to the appropriate node? Write down the finger table entry each intermediate node looks at, and the node it forwards the request to. 
+6. (10 points) What failure detection mechanism do you suggest for this system, and why?
+
+(1) 6 entries in each finger table (n = 6 where 2^n = 64).
+(2) the key-value pair for key 'k' hashed to 49 is stored in node 50.
+(3) node 5's finger table: 6 (succ 7), 7 (succ 7), 9 (succ 17), 13 (succ 17), 21 (succ 32), 37 (succ 40).
+(4) node 40's finger table: 41 (succ 50), 42 (succ 50), 44 (succ 50), 48 (succ 50), 56 (succ 62), 8 (succ 17).
+(5) Node 5 would access its finger table entry 37 and forward the request to the subsequent node 40. Node 40 would access its finger table entry 48 and forward the request to node 50. Since node 50 is the nearest node subsequent to key 49 in the ring structure, it contains the desired data for the query for key 49.
+(6) I would recommend using a ring-based heartbeat-type failure detection mechanism. This is because nodes are already conceptualized in a ring structure according to Chord and already have communication channels to subsequent adjacent nodes in the ring. Heartbeat is also a robust detection mechanism; the ring-based heartbeat method isn't always accurate or failproof but is always complete.
+
+
+===================================
+QUESTION 9
+
+For her research, Alice is building an application that pulls data from twitter. She wants to study mentions of other users in tweets. Given a user, she wants to study who the user has mentioned and how many times. E.g., she wants to know who Bob mentioned in his tweets. She also wants to maintain how many times each user was mentioned in Bob’s tweets. 
+
+
+--------------------
+1. (10 points) She is not sure what kind of a database to use for this application. What database would you suggest to her, and why?
+
+(1) I'd suggest using a non-relational document-based database. This would allow for efficiently storing and querying the twitter data. To study this data, the database might be structured so that each user is associated with a document, which contains arrays of users they've tagged and their associated tag counts. This data could be quickly accessed in order to be further studied or manipulated as desired.
+
+
+--------------------
+2. (5 points) Will Alice benefit from using an in-memory cache? Why?
+
+(2) Yes. If Alice is repeatedly querying twitter data to obtain the number of times a selected user mentions each of other users, it would vastly increase her query times with regard to twitter's data to store the selected user's tweets in an in-memory cache for faster access. Otherwise queries would have to navigate significantly more data (conceivably all of twitter's data) to locate the user's tweets .
+
+===================================
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,82 @@
+Carsten Hood
+CSCE 221
+HW 8
+
+—————————————————————————
+1. Consider the following sorting algorithms: insertion sort, selection sort, heapsort, mergesort, quicksort, bucket-sort, radix-sort. Which are stable and which are not? Which are in-place and which are not? Explain your reasoning for all responses. (25 points)
+
+Answers are based on what is possible with the algorithms, but all answers depend on implementation.
+- insertion sort is stable. As an element with a key identical to that of a previously sorted element is searching for its position in the sorted sequence from the back, it will stop after the previously sorted element, retaining its order. It is in-place because elements can be shifted one by one and no extra memory is required.
+- selection sort is unstable because when the next minimum element is swapped to the front, it may switch the order of two elements with equal keys: a1, a2, b1  ->  b1, a2, a1; It’s in-place because elements can be swapped one by one within the bounds of the sequence.
+- heapsort is unstable; it involves swapping elements from the top of a tree to the bottom, which can change their rank relative to others with equal keys. It is in-place as it doesn’t involve a temporary sequence.
+- mergesort can be stable; equal elements must be merged so that their order is not swapped, which can be done without adding extra time. It’s not in-place because it requires extra space to store the sorted sequence.
+- quicksort usually cannot be stable because it involves swapping elements, which may upset the order of equal elements. It can be implemented to be in-place, swapping elements within the original sequence’s memory.
+- bucket-sort can be stable depending on how the buckets are individually sorted - they are partitioned by index, so dividing elements does not affect stability. It’s not in-place because it stores elements in temporary memory called “buckets”.
+- radix-sort is stable because elements are never swapped. It’s not in-place because elements must be stored temporarily in buckets that take extra memory.
+
+—————————————————————————
+2. Describe a radix-sort method for lexicographically sorting a sequence S of triplets (k,l,m), where k, l, and m are integers in the range [0,N-1], for some N > 1. How could this scheme be extended to sequences of d-tuples (k1, k2, ..., kd), where each ki is an integer in the range [0,N-1]? Justify your answer by analyzing the running time of your methods and providing a correctness argument. (30 points)
+
+To sort a sequence of triplets, perform 3 bucket sorts. The first would use the third dimension as the key, the second the middle dimension, and the third the first. Because a bucket sort is stable, this will output the sequence in order.
+
+Algorithm radixSortTriplets(S, N)	set the key of each item to m
+	bucketSort(S, N)
+	set the key of each item to l
+	bucketSort(S, N)
+	set the key of each item to k	bucketSort(S, N)
+
+Setting the key of each item to the proper dimensions takes O(n). Each element must be operated on. A bucket sort is known to take O(n+N), but since the range is known exactly, N = n, so O(n+N) = O(2n) = O(n). Therefore every operation takes O(n) for 6 lines: we have 6*O(n) = O(n).
+
+To sort a sequence of elements with an unknown number of dimensions, use the same procedure in a loop: bucket sort once for each dimension, starting with keying the sort on the last dimension and ending with a sort keyed on the first.
+
+Algorithm radixSort(S, N)	for integer i decreasing from d to 1		set the key k of each item to the i-th dimension of x		bucketSort(S, N)
+
+The loop runs d times. Each iteration sets the key of every element and then performs a bucket sort, which take O(n) and O(n) as discussed above. Overall: d*2*O(n) = O(d*n).
+
+The algorithm works because the first dimension has the final say in determining the order, but the other dimensions have been sorted. Because the bucket sort is stable they remain sorted unless a more important key changes their order, so the sequence ends up sorted lexicographically.
+
+—————————————————————————
+3. Space aliens have given us a program, alienSplit(S), that can take a sequence S of n integers and partition S into sequences S_1, S_2, ..., S_p of size at most ceiling(n/p) each, such that the elements in S_i are less than or equal to every element in S_(i+1), for i=1, 2, ..., k-1, for a fixed number, p < n. (40 points)
+
+(a) Assuming that alienSplit() takes O(n) time, show how to use alienSplit() to sort S in O(nlogn/logp) time. Carefully analyze the running time of your algorithm and argue its correctness.
+
+Use an algorithm similar to mergesort. Call alienSplit() on S and continue to recursively call alienSplit() on the resulting subsets until they are too small to be split; then merge all elements, which will have been ordered by the sequence of alienSplits.
+
+sequence Algorithm alienSort(S, C)
+	if S.size > 1
+		sorted sequence-of-sequences SS = alienSplit()		Divide
+		for every sequence in SS							Recursively Call self
+			alienSort(S, C)
+		for every sequence in SS							Conquer
+			add sequence to outputSequence
+		return outputSequence
+	else 
+		return S
+
+Dividing the elements takes O(n) via alienSplit.
+This divides the problem into p subproblems of size ceil(n/p).
+The conquer step involves simply combining the elements in O(n).
+Therefore, the algorithm follows the following recurrence relation of the form T(n) = D(n) + k*T(n/c) + C(n):
+T(n) = O(n) + p*T(ceil(n/p)) + O(n)
+ 	= O(n) + p*T(ceil(n/p))
+	= O(n) + p*O(n/p) + n/p*O(n/p/p) + n/p/p*O(n/p/p) + …. + 1
+which simplifies to: log_p(n)*O(n) = O(nlogn/logp)
+because each successive function call divides the number of elements by p.
+
+(b) Show how you could use alienSplit(S) as part of parallel algorithm for sorting S on a parallel computer with p processors. Assuming alienSplit() takes time O(n/p), analyze the running time of your parallel algorithm and analyze the total work done by all the processors in your algorithm in total (called the work of the parallel algorithm).
+
+First call alienSplit() on a sequence S. This divides S into p subsets of size [ceiling(n/p)] in O(n/p). Assign each subset to the processor corresponding to its rank (1 through p). Then each processor recursively calls alienSplit on its subset, similar to merge sort, until all subsets are sorted.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
