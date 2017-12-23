@@ -1,0 +1,2 @@
+show images (SUCCESS)
+admin show images (SUCCESS)

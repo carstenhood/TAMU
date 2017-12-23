@@ -1,0 +1,35 @@
+Carsten Hood
+hw 1 pr 1
+Testing Document
+
+I tested my program 5 times, once for every operator and again with an invalid operator "x". I chose to input the values 2 and 3 as the operands, to keep the math simple but still demonstrate that the program functions correctly.
+
+Output 1
+Operation: +
+First operand: 2
+Second operand: 3
+Output: 5
+
+Output 2
+Operation: -
+First operand: 2
+Second operand: 3
+Output: -1
+
+Output 3
+Operation: *
+First operand: 2
+Second operand: 3
+Output: 6
+
+Output 4
+Operation: /
+First operand: 2
+Second operand: 3
+Output: 0.666667
+
+Output 5
+Operation: x
+First operand: 2
+Second operand: 3
+Invalid Operator

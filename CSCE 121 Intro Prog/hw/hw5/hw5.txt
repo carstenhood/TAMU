@@ -1,0 +1,157 @@
+Carsten Hood
+Homework 5
+Testing Document
+
+IMPORTANT
+I ran my program using the following commands within the specified hw folders (hw5pr1, hw5pr2, etc):
+
+TO COMPILE:
+g++-4.7 -std=c++11 *cpp -lfltk -lfltk_images
+TO RUN:
+./a.out
+
+----------------------------------------------------
+
+Problem 1
+"Hotel Bookings"
+
+- I input the names of nonexistent hotels, such as "x".
+The program correctly output: "There is no hotel named "x". Try again."
+
+
+- I input a correct hotel name and then entered several invalid date formats to ensure the program did not crash:
+input: 1 1 2014 
+output: Invalid date format. Try again.
+input: 1//1/2014 
+output: Invalid date format. Try again.
+input: x
+output: Invalid date format. Try again.
+input: (none)
+output: Invalid date format. Try again.
+
+
+- I continued to input several correctly formatted but invalid dates to check that errors were correctly  handled:
+input: 1,0,2014   //There is no day "0":
+output: Invalid date. Try again.
+input: 1/1/2013   //Won't accept dates in the past: 
+output: Invalid date. Try again.
+input: 1/2/2015   //Only accepts the year 2014:
+output: Invalid date. Try again. 
+input: 2/29/2014   //2014 is not a leap year
+output: Invalid date. Try again.
+
+
+- I input an end date that comes before a start date, which I had accounted for:
+input:
+Enter a valid START date for your 2014 reservation: 1,2,2014
+Enter a valid END date for your 2014 reservation: 1,1,2014
+
+output:
+End dates must come after start dates. Please try again.
+
+
+- I incorrectly input an end date on the same day as the start date. (A reservation should be overnight).
+input:
+Enter a valid START date for your 2014 reservation: 3,2,2014
+Enter a valid END date for your 2014 reservation: 3,2,2014
+
+output:
+End dates must come after start dates. Please try again.
+
+
+- I input several valid reservations for the same hotel and dates to fill up the rooms, and then attempted to book further reservations on those dates to test that my program would catch the "Unavailable" exception correctly.
+input: 
+Enter a valid START date for your 2014 reservation: 1,1,2014
+Enter a valid END date for your 2014 reservation: 1,2,2014
+
+output:
+No rooms available at Bob's on those dates. Please allow a day between reservations. Try again.
+
+
+- I input a reservation that spanned a year, with 2 reservations already made for the same 2 days in the middle; even then the rooms should be unavailable:
+input: 
+Enter a valid START date for your 2014 reservation: 1,1,2014
+Enter a valid END date for your 2014 reservation: 12,30,2014
+Enter a name for your reservation: d
+
+ouput:
+Your reservation "d" has been booked.
+
+This was incorrect, and I discovered and corrected errors in my code so that no rooms were erroneously overbooked.
+
+
+I input various names for my reservations throughout; all worked correctly, for example: 
+input:
+Enter a name for your reservation: testing bla $5# ds ;84
+
+output:
+Your reservation "testing bla $5# ds ;84" has been booked.
+
+
+
+----------------------------------------------------
+Problem 2
+"Polygons within Polygons"
+
+I accidentally did Exercise 12 concerning Superellipses, instead of Exercise 11 at first, wasting a good many hours; (I placed Superellipses in a folder "Bonus"….) I only realized this mistake after doing Problem 3; Due to this, I did Problem 2 using Problem 3's code, so Problem 2 satisfies both Problem 2 and Problem 3 part B, "do problem 2 again using your new polygon class," because I did it the first time using my new polygon class.
+
+Whichever way I tried to initialize and place my custom struct objects of type "Regular_polygon" in a vector, I always received an error, so I settled for writing out the individual shapes instead of using a loop.
+
+I tried equations to make vertices of an inside polygon touch the sides of the enclosing polygon. However, I realized there is no geometric way for a regular polygon with sides N to land every point directly on the side of a larger polygon with sides N+1, and still be centered. I settled for separating them by a somewhat accurate distance, so that most edges touch.
+
+----------------------------------------------------
+
+Problem 3
+Chapter 13 Exercise 10
+"Polygon"
+
+I input bad values to ensure the program would not crash.
+Inputs and Outputs: 
+Enter the center x-coordinate: -1
+Input values must be positive.
+Enter the center x-coordinate: 2
+Enter the center y-coordinate: 2
+Enter the number of sides: -4
+Number of sides must be greater than 2.
+Enter the number of sides: 2
+Number of sides must be greater than 2.
+Enter the number of sides: -3.4
+Number of sides must be greater than 2.
+Enter the number of sides: 5
+Enter the distance from center to corner: 0
+Input values must be positive.
+Enter the distance from center to corner: 1
+
+I input values for a very small polygon and received a doable exception:
+Enter the distance from center to corner: 1
+Exception: two polygon points lie in a straight line
+
+I input various polygon characteristics to test the program and enjoy my success:
+(see screenshot1.png and screenshot2.png)
+
+**Example**
+Enter the center x-coordinate: 100
+Enter the center y-coordinate: 100
+Enter the number of sides: 17
+Enter the distance from center to corner: 134.8
+
+Drawing polygon...
+
+Polygon drawn successfully.
+
+** Example**
+Enter the center x-coordinate: 100
+Enter the center y-coordinate: 100
+Enter the number of sides: 18
+Enter the distance from center to corner: 80
+
+Drawing polygon...
+
+Polygon drawn successfully.
+
+
+
+
+
+
+

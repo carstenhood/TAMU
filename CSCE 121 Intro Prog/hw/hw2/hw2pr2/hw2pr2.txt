@@ -1,0 +1,50 @@
+Carsten Hood
+hw 2 pr 2
+Testing Document
+"Names and Scores"
+
+I tested my program with correct inputs twice. I entered common names and basic integers to ensure that the program functions correctly when the user inputs are valid. I then tested the program twice with a repeated name, and received the appropriate error message. I also entered to random strings, and received no entries, as expected.
+
+Output 1: (correct entries)
+Enter name and score pairs:
+John 2
+Dave 2342
+Sarah 23
+No more
+
+Entries:
+(John,2)
+(Dave,2342)
+(Sarah,23)
+
+
+Output 2: (correct entries)
+Enter name and score pairs:
+John 23
+Bob -2532
+No more
+
+Entries:
+(John,23)
+(Bob,-2532)
+
+
+Output 3: (repeated entries)
+Enter name and score pairs:
+Dave 2
+John 3
+Dave 7
+Error. Repeated Entry.
+
+
+Output 4: (repeated entries)
+Enter name and score pairs:
+r 4
+r 34
+Error. Repeated Entry.
+
+Output 5: (no entries)
+Enter name and score pairs:
+asd sfda
+
+Entries:

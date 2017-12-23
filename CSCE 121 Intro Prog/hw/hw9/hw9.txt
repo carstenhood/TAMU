@@ -1,0 +1,46 @@
+Carsten Hood
+Homework 9
+Container Drills 1-8
+
+---------------------------------------------------
+
+In working on this program I used the following code to output the values of each container for testing purposes.
+
+//testing
+cout << "\nVector: ";
+for (int i=0; i<v.size(); ++i)
+	cout << v[i] << ", ";
+    
+cout << "\nList: ";
+for (int i:l)
+	cout << i << ", ";
+    
+cout << "\nArray: ";
+for (int i:a)
+	cout << i << ", ";
+cout << "\n";
+//end of testing code
+
+
+It would give me an easily read output like this:
+—————————
+Vector: 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 
+List: 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 
+Array: 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+—————————
+
+I encountered most trouble in these 2 areas:
+
+1) Trying to initiate array2 by copying array1; I ended up deciding that this had to be done somewhat manually, by initiating array2 to the size of array1 and then copying its elements one by one via a loop, which worked perfectly.
+
+2) Outputting the index of a given int value (27) in a list using the find() method; because a list does not allow for complex operations of iterators (because a list isn’t contiguous), i.e. int i = l.begin() - l.end(); //error, I could not find a way to convert the iterator returned by find() into an index through one line; I ended up simply looping through the list, incrementing an index value each iteration, and then exiting the loop upon reaching the pointer equaling that returned by find(). Because 27 never appears in the array, so none of this code is actually used, I tested it by calling find() with the parameter 7, and received the correct output: 
+—————————
+Index of 7 in list: 2
+—————————
+
+My final output, after removing the testing code:
+—————————
+Index of 3 in vector: 1
+27 not found in list.
+—————————
+

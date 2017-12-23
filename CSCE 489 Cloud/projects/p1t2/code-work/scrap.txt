@@ -1,0 +1,62 @@
+
+idk if this means anything but where you have "127.0-01:27017" at the top of your screenshot I have "mongodb://127.0.0.1/mbdb" or for you "mongodb://127.0.0.1/test"
+
+result = collection.find_one({"name":board_name}, {"_id":0, "messages":1})
+
+messages = result.get('messages')
+
+for message in messages: print message
+
+
+=============================
+COMMANDS
+
+mongod --dbpath /Users/carstenhood/Documents/education/TAMU/2017_fall/CSCE-489/projects/p1t2/mongo
+mongoimport --host 127.0.0.1 --jsonArray --collection message_boards --file message_boards.json --db test
+// new terminal window
+mongo --host 127.0.0.1 --use mbdb
+db.shutdownServer()
+db.message_boards.find().pretty()
+
+db.message_boards.deleteMany({})
+
+> db.getName() // see the name of your database
+test //output
+> db.copyDatabase("test","mbdb","localhost")
+> use test
+switched to db test //output
+> db.dropDatabase()
+{ "dropped" : "test", "ok" : 1 } //output
+> use mbdb
+> db.message_boards.find().pretty()
+
+> use admin
+> db.shutdownServer()
+
+db.copyDatabase("test","mbdb","localhost")
+use test
+db.dropDatabase();
+
+READ
+db.message_boards.find({"name" : "message_board1"}, {"messages" : 1})
+db.message_boards.find({"name" : "message_board1"}, {"messages" : 1, "_id": 0})
+
+WRITE
+db.profiledb.update({Name:"Alice"}, {$ essae: {Age:24}})
+
+REDIS
+
+$ src/redis-server
+# open new terminal window
+$ src/redis-cli
+> set foo bar
+> get foo
+$ redis-cli shutdown
+
+
+
+=============================
+LINKS
+
+“MongoDB Structure for message app”
+https://stackoverflow.com/questions/11228351/mongodb-structure-for-message-app

@@ -1,0 +1,11 @@
+[
+	{
+		"id": 1,
+		"name": "board1",
+		"messages": ["message1a", "message2b"]
+	}, {
+		"id": 2,
+		"name": "board2",
+		"messages": ["message2a", "message2b"]
+	}
+]

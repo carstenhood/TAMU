@@ -1,0 +1,25 @@
+Carsten Hood
+UIN: 922009787
+CSCE 489-599 Cloud Computing
+Fall 2017
+
+Project 0 Report / Instructions
+
+• I spent 7-10 hours on this project (starting was very slow).
+• This was my first time ever to use Python.
+• To build/run simply execute aggiestack.py: $ python aggiestack.py
+• The program is meant to accept multiple commands in a single run and isn’t persistent.
+• All commands are logged in aggiestack-log.txt, which saves when the program closes.
+
+valid command examples (can prepend “aggiestack” to any of them):
+config --hardware hdwr-config.txt
+config --images image-config.txt
+config --flavors flavor-config.txt
+show hardware
+show images
+show flavors
+show all
+admin show hardware
+admin can_host k1 small
+quit
+exit

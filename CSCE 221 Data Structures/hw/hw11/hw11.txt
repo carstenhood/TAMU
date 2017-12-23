@@ -1,0 +1,37 @@
+Carsten Hood
+HW 11
+CSCE 221-200
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+1.  First, sketch pseudocode for a DFS traversal. Assume the input graph G=(V,E) is a simple, undirected graph with n vertices and m edges. Next, analyze the running time of the DFS traversal assuming the graphs is represented with (i) an edge list, (ii) an adjacency list, and (ii) an adjacency matrix. (30 points)
+
+Algorithm DFS(Graph G, Vertex V)
+	V->setLabel(Discovered)
+	for each Edge E in adjacentEdges(G, V)
+		vertex X = opposite(E, X)
+		if X->getLabel == Discovered
+			call DFS(G, X)
+
+//First visit the given vertex, then iterate through its incident edges. When the incident vertex opposite the edge is unexplored, call DFS recursively on that vertex.
+
+(i) 
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+2. Show that if T is a BFS tree produced for a connected graph G=(V,E), then for each vertex v at level i, the path of T between s and v has i edges, and any other path of G between s and v has at least i edges. That is, there is no path from s to v that has fewer edges. (30 points)
+
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+3. An Euler Tour of a directed graph G=(V,E) is a cycle that traverses each edge of G exactly once according to its direction. Such a tour always exists if G is connected and the in-degree equals the out-degree of each vertex in G. Describe an O(n+m)-time algorithm for finding an Euler tour of such a digraph G. (40 points)
+
+
+
+
+
+
+
+
+
+
+
+
+
+

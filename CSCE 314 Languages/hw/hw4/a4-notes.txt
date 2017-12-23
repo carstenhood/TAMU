@@ -1,0 +1,23 @@
+— exec function (rep means replays)
+exec :: WStmt -> Memory -> Memory
+exec (Empty) m = m
+exec (Assign s e) m = repFDefF s (eval e m) m
+    where
+        repFDefF _ _ [] = eval $ "undefined variable" ++ s
+        repFDefF s v (x@(k,_):xs)
+    | s == k =
+        if (sameKind v x) then (k, v):xs
+        else error "Type mismatch"
+    | otherwise
+        x:repFDef s v xs
+    where
+        sameKind v@(VInt _) x@(_, VInt _) = True
+        sameKind v@(VBool _) x@(_, VBool _) = True
+        sameKind _ _ = False
+exec (Block ss) m = popMarker $
+    foldr exec (marker:m) (reverse ss)
+        where
+            popMarker [] = []
+            popMarker (x:xs)
+            | isMarker (x,_) {xs}
+            | popMarker x)

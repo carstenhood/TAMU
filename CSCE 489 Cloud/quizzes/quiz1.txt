@@ -1,0 +1,109 @@
+CSCE 489 quiz 1
+
+Quiz 1  
+due on Monday, 9/18 at 11:59pm.
+
+Instructions	
+Answer each of the following questions with no more than 3 sentences. 
+You can consult anything in the Internet but do not consult your classmates or friends.
+We do not expect perfect answers. In some cases, we are interested in seeing how you approach the question.
+
+Multiple Attempts - Not allowed. This test can only be taken once.
+Force Completion - This test can be saved and resumed later.
+
+===================================
+QUESTION 1
+
+Does it always make sense to run applications on the data center rather than locally in a client? Explain with an example.
+
+No - for example, it may be desirable to run an application that interacts with confidential locally-stored data in a client. This can avoid communicating sensitive data over vulnerable channels to a data center application and can protect information.
+
+https://www.computerworld.com/article/2520140/networking/cloud-vs--in-house--where-to-run-that-app-.html?page=3;
+
+===================================
+QUESTION 2
+
+Even though it is expensive to afford space in New York City, some companies want to keep their datacenters there. What advantages could they be trying to leverage?
+
+Advantages of hosting data centers in expensive urban environments may include proximity to major clients (and hence reduced latency in communications between the data center and client), access to superior or preexisting urban infrastructure (including power, water, and network infrastructure), proximity to skilled workers, and a more conspicuous public presence.
+
+===================================
+QUESTION 3
+
+Are there single points of failures in a datacenter with a large number of machines? Explain your answer.
+
+Yes - for example, a network switch used to connect all machines to the Internet would constitute a single point of failure. Loss of power or other failure of the switch would cut the entire data center off from outside communications.
+
+http://searchdatacenter.techtarget.com/definition/Single-point-of-failure-SPOF;
+
+===================================
+QUESTION 4
+
+There are four servers A, B, C, and D in the same datacenter. Can there be a difference in the latency or throughput between them?
+
+Yes - communication speed metrics between the servers may differ depending on their arrangement and the data center network topology. As a simple example, if the servers are arranged in a binary tree configuration, with A paired with B and C paired with D, then certain communications in the same branch (e.g., between A and B) may experience less latency than communications between branches (e.g., between A and C). Differences between machines and technical issues may also lead to varying latency and throughput.
+
+https://www.networkworld.com/article/2230157/cisco-subnet/latency-in-the-data-center-matters.html;
+
+===================================
+QUESTION 5
+
+A developer wants to deploy a new software to manage a datacenter. He is planning to deploy it at 2am, when he suspects that there is very little load on the system, and any bug will have a small impact. Does his reasoning sound right to you? Why?
+
+My first thought is that the developer should be more confident in the reliability of his code prior to deployment and should not rely on testing it live. However, if he faces other constraints and needs to deploy quickly, it seems his reasoning could make sense as a means of mitigating potential damage.
+
+===================================
+QUESTION 6
+
+Indicate three reasons that enable economy of scale on data centers for cloud computing. In other words, how can the providers sell computing and storage power so cheap and still have a good profit margin?
+
+Factors toward economy of scale include: (1) efficient allocation of administrators in one location instead of separate firms requiring their own in-house administrators; (2) shared space with shared infrastructure costs (e.g., power & cooling); and (3) magnified payoff of size-independent software development costs over more machines (with negligible marginal costs per added machine).
+
+http://cloudscaling.com/blog/cloud-computing/understanding-cloud-datacenter-economies-of-scale/;
+
+===================================
+QUESTION 7
+
+What is the 3-tier architecture? Explain the functionality of each layer.
+
+The 3-tier architecture separates client-server technology into three modules based on their function. The presentation tier interfaces the application with users, the application or logic tier controls the underlying application and processes commands, and the data tier interacts with the server to communicate information between the database and the application.
+
+https://www.adldata.org/3-tier-architecture/;
+https://en.wikipedia.org/wiki/Multitier_architecture#Three-tier_architecture;
+
+===================================
+QUESTION 8
+
+Is it necessary for all the servers in a datacenter to be similar to each other (i.e., homogeneous)? Are there any advantages of having similar servers? What are the disadvantages?
+
+Having uniform servers isn’t necessary but allows for increased upgrade, maintenance, and scaling efficiencies. Disadvantages of homogeneity include lacking robustness when features fail and different systems can’t provide back-up.
+...
+
+http://conferences.sigcomm.org/co-next/2010/CoNEXT_papers/14-Curtis.pdf;
+search: homogeneity different servers data center pros cons;
+
+===================================
+QUESTION 9
+
+Who has the tougher challenge: engineers optimizing power consumption for smartphones or for datacenters?
+
+Data centers present a more difficult challenge.They are (arguably) more complex systems and power usage is a central cost of operating a data center, so technology for mitigating data center power consumption has been pushed to the limits of contemporary understanding. Power consumption of smartphones is optimized not to cut central business costs but to increase device lifespan, which is more easily addressed by battery improvements.
+
+===================================
+QUESTION 10
+
+If large cloud providers such as Microsoft Azure or Amazon AWS were to merge, and they hire you to run the combined data centers, would you be able to achieve higher cost efficiency?
+
+No; as an initial thought, I am not qualified to manage such systems productively. Additionally, these systems are (1) already massive and (2) very different, so the ability to economize by scale is negligible – there is no overlap between their costs.
+
+===================================
+
+
+
+
+
+
+
+
+
+

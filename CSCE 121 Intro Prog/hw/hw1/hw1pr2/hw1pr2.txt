@@ -1,0 +1,47 @@
+Carsten Hood
+hw 1 pr 2
+Testing Document
+
+I tested my program 3 times with satisfactory results. To keep the math simple I entered identical values for each coin within each test. First 0's, then 1's, and then 2's. Mainly I wanted to ensure that a singular count of coins is followed by the appropriately singular form of the noun. 
+
+Output 1
+How many pennies? 0
+How many nickels? 0
+How many dimes? 0
+How many quarters? 0
+How many half dollars? 0
+
+You have 0 pennies.
+You have 0 nickels.
+You have 0 dimes.
+You have 0 quarters.
+You have 0 half dollars.
+Your total is $0.0.'
+
+Output 2
+How many pennies? 1
+How many nickels? 1
+How many dimes? 1
+How many quarters? 1
+How many half dollars? 1
+
+You have 1 penny.
+You have 1 nickel.
+You have 1 dime.
+You have 1 quarter.
+You have 1 half dollar.
+Your total is $0.91.
+
+Output 3
+How many pennies? 2
+How many nickels? 2
+How many dimes? 2
+How many quarters? 2
+How many half dollars? 2
+
+You have 2 pennies.
+You have 2 nickels.
+You have 2 dimes.
+You have 2 quarters.
+You have 2 half dollars.
+Your total is $1.82.
