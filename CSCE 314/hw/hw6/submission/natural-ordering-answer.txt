@@ -1,9 +1,0 @@
-// Assignment p6, CSCE-314
-// Section: 502
-// Student Name: CARSTEN HOOD
-// UIN: 922009787
-
-Natural Ordering Answer
-“Explain why the above ordering is not a good choice for a natural ordering of the shape class.”
-
-Comparing the notional areas of Shape objects is not the most intuitive means of ordering them. A more natural approach would be to order Shape objects according to their types (i.e., by whether they are triangles, rectangles, squares, circles, or line segments). Also, comparing shapes by area requires calculating their areas, whereas comparison by shape type and/or shape position would simply involve evaluating properties of shape objects.

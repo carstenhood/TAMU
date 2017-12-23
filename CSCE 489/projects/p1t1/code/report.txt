@@ -1,52 +1,0 @@
-Carsten Hood
-UIN: 922009787
-CSCE 489-599 Cloud Computing
-Early deadline: 2017/9/25
-Final deadline: 2017/10/6
-
-Task 1: P1-T1 – Fitness data on MongoDB
-“You need to prepare a report that contains the following:”
-
-============================
-1. The time you took to complete this task
-
-6 hours (including familiarization, browsing online, watching videos, answering questions etc)============================2. P1-T1-a: A section on the features of MongoDB that make it suitable for the application. If you disagree with your client, you will have to provide a thorough explanation.
-P1-T1-a: The AggieFit team tells you that their senior management wanted to use a relational database for this application, but they think MongoDB fits better. Now, they need to convince the senior management that their choice is indeed appropriate. They ask you to provide a short write-up to validate their choice of database, specifically, what features of MongoDB makes it more suitable for their application.
-
-MongoDB’s features will allow for a quicker development process and a more robust application. MongoDB’s document model is a more intuitive and flexible means of containing data like the application’s user fitness information. For example, data can be structured in familiar JSON files rather than in unwieldy relational structures. Also, since users will provide disparate fitness data, we can take advantage of MongoDB’s flexible data model. MongoDB’s expressive query language then allows for efficient access of this data. Furthermore, the quality of strong consistency will facilitate application development, since developers won’t have to account for obsolete or unsynchronized data. Another desirable feature of MongoDB is the health of its community and developers; documentation and support is easily accessible and unlikely to diminish.
-
-============================3. P1-T1-b: Include any comments you have about improving the design of the database.
-
-No comments on design improvement. See queries.txt for query solutions.
-
-============================4. P2-T1-c:
-P1-T1-c: Currently, all the data for AggieFit is stored in one single server. The team is not sure if more servers are required. They are asking you for your opinion and comments on what could go wrong if they store all their data in one server.
-If they do decide to put their data on different servers, they want to know whether each server should contain copies of the same data, or they should split the data among the servers. They want you to provide your inputs on what they need to consider before making the decision.
-——————
-i. A section with your comments and opinions about what could go wrong with placing all their data in one server.
-
-The central risk of keeping all data on a single server is the risk of losing data or data availability should the sole server or its network connection be damaged or otherwise fail. The risk of data loss can be partially mitigated through frequent backups, but backups may still be obsolete or incomplete and don’t address the risk of losing data access temporarily. With a single server even basic maintenance and development tasks such as software updates may require temporarily taking the application offline. For these reasons it would be advisable to use two or more servers.
-
-——————ii. A section with your comments and opinions on how data should be spread across multiple servers.
-
-I recommend maintaining multiple duplicate servers such that each server contains copies of the same data. Due to the relatively small amount of data and the small workload involved, this would be relatively simple and costless, and these servers do not necessarily have to constitute separate dedicated hardware systems and may be virtual servers operating alongside other processes on distributed hardware. For example, there could be one or two in-house servers along with a third-party-hosted virtual server (in a separate location). This would provide a level of robustness in case of failure or compromise of one of the servers or one of the servers’ network connections. It would also ensure that the application could continue to function normally during local server maintenance.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

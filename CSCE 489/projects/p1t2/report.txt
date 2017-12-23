@@ -1,67 +1,0 @@
-Carsten Hood
-UIN: 922009787
-CSCE 489-599 Cloud Computing
-Early deadline: 2017/10/2
-Final deadline: 2017/10/6
-
-Task 2: P1-T2 – Message boards
-“You need to prepare a report that contains the following:”
-============================
-1. The time you took to complete this task
-
-5-6 hours
-
-============================
-2. P1-T2-a:
-============================
-i. A section on your architecture. You may have decided to use the databases for different purposes. You should explain your choice in the report. Also, you will need to explain what happens when a user performs an operation on the system.
-“First, you will need to go through the features of both databases and identify which one is suitable for what part and propose where the databases fit in the architecture. The architecture should clarify what happens when a user selects, reads from, writes to, and listens to the message boards.”
-
-The proposed system architecture uses both MongoDB and Redis in tandem. Both database systems have qualities that make them desirable for certain purposes in the application.
-MongoDB allows for neatly querying persistently stored data. It also makes it easy to test a persistent database locally. Another valid benefit of MongoDB is that it can likely be implemented faster and more cheaply than Redis. This is because (1) MongoDB is generally considered to be easier to use than Redis and (2) since we’ve used MongoDB for prior projects (e.g., to manage fitness data) we are already familiar with it and already have it set up. Redis may provide faster query times than MongoDB, but this consideration is negligible given the small size of our database and network. Hence, the central database will use MongoDB. This database will store simple message board data items, each of which comprises an array of messages and a message board name.
-
-Still, broadcasting real-time messages as demanded by the application appears difficult using MongoDB alone. To achieve this functionality we’ll incorporate Redis. This is because Redis provides a simple Pub/Sub library that allows for broadcasting messages through channels to other clients in real time.
-
-The architecture uses both MongoDB and Redis to perform the desired operations as follows:
-(i) select operation - When a client calls the operation to select a message board, it queries the MongoDB database to check if a message board with the desired name exists. If it does, subsequent operations refer to this selected message board.
-(ii) read operation - The client queries the MongoDB database for the selected board’s list of messages.
-(iii) write operation - The client updates the selected message board in the MongoDB database with the new message. It also publishes the message to a channel according to Redis’ Pub/Sub functions so it can be viewed by other clients in real time.
-(iv) listen operation - The client subscribes to the Redis channel so that any other users’ new messages are immediately received.============================
-ii. A section on your prototype and instructions on how to run your code.
-
-The prototype is implemented as a python file messenger.py that imports a small amount of code for interfacing with MongoDB from constants.py and mongo_connect.py (and that also interfaces with Redis using redis-py as suggested).
-
-The program can be executed with:
-$ python messenger.py
-
-I ran a local Redis server with:
-$ src/redis-server
-and a local MongoDB database with:
-$ mongod --dbpath /Users/…/p1t2/mongo
-and uploaded test data from a JSON file message_boards.json:
-$ mongoimport --host 127.0.0.1 --jsonArray --collection message_boards --file message_boards.json --db mbdb
-
-The program and code are self-explanatory and constitute a central loop where each iteration requests command line input to perform one of the requisite operations.
-
-BONUS: The program includes error checking on all input.============================
-3. P1-T2-b: OPTIONAL FOR BONUS POINTSi. A section with your comments on the consistency model for the application
-“The team wants your input on the consistency level required for their application if they make the database distributed. Specifically, they would like to understand the tradeoff between consistency and availability for their application.”
-
-I think near-perfect consistency would be achievable without affecting availability if the database were made a distributed database and that any tradeoff between consistency and availability would be negligible. Presently modification of data in the database only occurs through the “write” operation for new messages. New messages could easily be quickly communicated through a distributed system so that subsequent “read” operations would incorporate this update. Because the client program cannot currently delete messages or message boards, the code would not have to be significantly augmented to guarantee atomicity and consistency. However, if deletion of data is a consideration, then code in the client program would have to be improved – for example, to check whether the selected message board still exists prior to performing operations.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
